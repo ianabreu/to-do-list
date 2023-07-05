@@ -18,9 +18,18 @@ const Theme = {
       darker: "#121212",
     },
   },
-  spacing: "0.5rem", //8px
+  spacing: {
+    p4: "0.25rem",
+    p8: "0.5rem",
+    p16: "1rem",
+    p24: "1.5rem",
+  },
   border: {
-    radius: "1rem",
+    radius: {
+      b8: "0.5rem",
+      b16: "1rem",
+      b24: "1.5rem",
+    },
     style: "0.0625rem solid #333333",
   },
 

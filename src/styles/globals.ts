@@ -7,4 +7,8 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: Montserrat, sans-serif;
   }
+  button, a {
+    cursor: pointer;
+    border: none;
+  }
 `;
