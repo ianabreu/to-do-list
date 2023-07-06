@@ -1,17 +1,10 @@
 import { useState } from "react";
-import {
-  Container,
-  ContainerArea,
-  HeaderArea,
-  Header,
-  Title,
-  NewTask,
-  FilterArea,
-  Filter,
-  TaskNumber,
-} from "./App.styles";
+import { Container, ContainerArea, TopArea } from "./App.styles";
 import { Item } from "./types/Item";
-import { ListItem } from "./components/ListItem";
+
+import Header from "./components/Header";
+import FilterMenu from "./components/FilterMenu";
+import ListItem from "./components/ListItem";
 
 const App = () => {
   const [list, setList] = useState<Item[]>([
@@ -24,20 +17,10 @@ const App = () => {
   return (
     <Container>
       <ContainerArea>
-        <HeaderArea>
-          <Header>
-            <Title>Lista de Tarefas</Title>
-            <NewTask>+ Nova Tarefa</NewTask>
-          </Header>
-
-          <FilterArea>
-            <Filter>
-              <span>Todos</span> <TaskNumber>15</TaskNumber>
-            </Filter>
-            <Filter>Ativas</Filter>
-            <Filter>Concluidas</Filter>
-          </FilterArea>
-        </HeaderArea>
+        <TopArea>
+          <Header />
+          <FilterMenu />
+        </TopArea>
 
         {list.map((item, index) => (
           <ListItem task={item} key={index} />

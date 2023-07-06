@@ -1,7 +1,7 @@
 const Theme = {
   color: {
     backgroundHover: "#E0E0E0",
-    backgroundLight: "#EBEBEB",
+    backgroundLight: "#FFFFFF",
     blue: {
       blue100: "#b1cdfc",
       blue500: "#045ff4",
@@ -10,7 +10,7 @@ const Theme = {
       red500: "#bf2e2e",
     },
     gray: {
-      light: "#EBEBEB",
+      light: "#FFFFFF",
       lightActive: "#C0C0C0",
       lightHover: "#E0E0E0",
       normal: "#333333",
