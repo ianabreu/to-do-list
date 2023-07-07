@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Container, ContainerArea, TopArea } from "./App.styles";
+import { Container, CenterArea, TopArea } from "./App.styles";
 import { Item } from "./types/Item";
 
 import Header from "./components/Header";
 import FilterMenu from "./components/FilterMenu";
 import ListItem from "./components/ListItem";
 
-const App = () => {
+export default function App() {
   const [list, setList] = useState<Item[]>([
     { id: 1, title: "Comprar pão", done: false },
     { id: 2, title: "criar video", done: true },
@@ -16,7 +16,7 @@ const App = () => {
   ]);
   return (
     <Container>
-      <ContainerArea>
+      <CenterArea>
         <TopArea>
           <Header />
           <FilterMenu />
@@ -25,8 +25,7 @@ const App = () => {
         {list.map((item, index) => (
           <ListItem task={item} key={index} />
         ))}
-      </ContainerArea>
+      </CenterArea>
     </Container>
   );
-};
-export default App;
+}

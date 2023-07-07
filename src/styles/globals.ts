@@ -10,5 +10,6 @@ export const GlobalStyle = createGlobalStyle`
   button, a {
     cursor: pointer;
     border: none;
+    transition: all 0.3s;
   }
 `;

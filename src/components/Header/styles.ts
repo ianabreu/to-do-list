@@ -1,22 +1,32 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const HeaderArea = styled.div`
+export const Container = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: ${({ theme }) => theme.spacing.p8};
-  margin-bottom: ${({ theme }) => theme.spacing.p8};
-  border-bottom: ${({ theme }) => theme.border.style};
+  ${({ theme }) => css`
+    padding: ${theme.SPACING.P08};
+    margin-bottom: ${theme.SPACING.P08};
+    border-bottom: ${theme.BORDER_STYLE.DARK};
+  `}
 `;
 export const Title = styled.h1`
-  color: ${({ theme }) => theme.color.gray.darker};
+  flex: 1;
   text-align: center;
+  ${({ theme }) => css`
+    color: ${theme.COLORS.GRAY_600};
+  `}
 `;
 export const NewTask = styled.button`
-  background-color: ${({ theme }) => theme.color.blue.blue100};
-  color: ${({ theme }) => theme.color.blue.blue500};
-  font-size: ${({ theme }) => theme.font.h3};
-  font-weight: 700;
-  border-radius: ${({ theme }) => theme.border.radius.b16};
-  padding: ${({ theme }) => theme.spacing.p16};
+  ${({ theme }) => css`
+    background-color: ${theme.COLORS.BLUE_100};
+    color: ${theme.COLORS.BLUE_500};
+    font-size: ${theme.FONT_SIZE.LG};
+    font-weight: 700;
+    border-radius: ${theme.BORDER_RADIUS.B08};
+    padding: ${theme.SPACING.P08};
+    &:hover {
+      filter: opacity(0.9);
+    }
+  `}
 `;

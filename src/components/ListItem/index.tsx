@@ -1,4 +1,5 @@
-import { Title, Container } from "./styles";
+import { Container, ContentInfo, IconButton } from "./styles";
+import { FaTrash, FaFilePen } from "react-icons/fa6";
 import { Item } from "../../types/Item";
 type Props = {
   task: Item;
@@ -6,7 +7,19 @@ type Props = {
 const ListItem = ({ task }: Props) => {
   return (
     <Container>
-      <Title>{task.title}</Title>
+      <input type="checkbox" />
+      <ContentInfo>
+        <h2>{task.title}</h2>
+        <time>Hoje - 08:00 AM - 09:00 AM</time>
+      </ContentInfo>
+      <div>
+        <IconButton color="#045ff4">
+          <FaFilePen size={25} />
+        </IconButton>
+        <IconButton color="#bf2e2e">
+          <FaTrash size={25} />
+        </IconButton>
+      </div>
     </Container>
   );
 };

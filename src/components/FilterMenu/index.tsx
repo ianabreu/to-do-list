@@ -1,13 +1,18 @@
-import { FilterBtn, FilterArea, TaskNumber } from "./styles";
+import { FilterArea, TaskNumber } from "./styles";
+import { FilterBtn } from "./FilterBtn";
 
 const FilterMenu = () => {
   return (
     <FilterArea>
       <FilterBtn>
-        <span>Todos</span> <TaskNumber>15</TaskNumber>
+        Todos <TaskNumber>15</TaskNumber>
       </FilterBtn>
-      <FilterBtn>Ativas</FilterBtn>
-      <FilterBtn>Concluidas</FilterBtn>
+      <FilterBtn>
+        Ativas <TaskNumber>8</TaskNumber>
+      </FilterBtn>
+      <FilterBtn>
+        Concluidas <TaskNumber>7</TaskNumber>
+      </FilterBtn>
     </FilterArea>
   );
 };

@@ -1,11 +1,11 @@
-import { HeaderArea, NewTask, Title } from "./styles";
+import { Container, NewTask, Title } from "./styles";
 
 const Header = () => {
   return (
-    <HeaderArea>
+    <Container>
       <Title>Lista de Tarefas</Title>
       <NewTask>+ Nova Tarefa</NewTask>
-    </HeaderArea>
+    </Container>
   );
 };
 export default Header;
