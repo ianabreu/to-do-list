@@ -30,6 +30,7 @@ export const ContentInfo = styled.div`
   ${({ theme }) => css`
     padding: ${theme.SPACING.P08};
     h2 {
+      text-decoration: line-through;
       text-align: left;
       font-size: ${theme.FONT_SIZE.MD};
       color: ${theme.COLORS.GRAY_600};

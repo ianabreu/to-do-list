@@ -6,7 +6,7 @@ const Theme = {
     GRAY_50: "#EBEBEB",
     GRAY_100: "#E0E0E0",
     GRAY_200: "#C0C0C0",
-    GRAY_300: "#333333",
+    GRAY_300: "#666666",
     GRAY_400: "#2E2E2E",
     GRAY_500: "#292929",
     GRAY_600: "#262626",

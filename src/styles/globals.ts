@@ -7,7 +7,7 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     font-family: Montserrat, sans-serif;
   }
-  button, a {
+  button, a, span {
     cursor: pointer;
     border: none;
     transition: all 0.3s;
