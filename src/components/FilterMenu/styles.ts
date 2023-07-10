@@ -1,9 +1,7 @@
 import styled, { css } from "styled-components";
 
-export type ButtonFilterTypeStyleProps = "true" | "false";
-
 type ButtonFilterProps = {
-  $active: ButtonFilterTypeStyleProps;
+  $active: boolean;
 };
 
 export const FilterArea = styled.div`
@@ -14,9 +12,7 @@ export const FilterArea = styled.div`
 export const ButtonFilter = styled.button<ButtonFilterProps>`
   font-weight: 700;
   ${({ theme, $active }) => css`
-    color: ${$active === "true"
-      ? theme.COLORS.BLUE_500
-      : theme.COLORS.GRAY_200};
+    color: ${$active ? theme.COLORS.BLUE_500 : theme.COLORS.GRAY_200};
     font-size: ${theme.FONT_SIZE.MD};
     padding: ${theme.SPACING.P08};
     background-color: ${theme.COLORS.WHITE};
@@ -30,7 +26,7 @@ export const ButtonFilter = styled.button<ButtonFilterProps>`
     span {
       font-weight: 700;
       ${({ theme }) => css`
-        background-color: ${$active === "true"
+        background-color: ${$active
           ? theme.COLORS.BLUE_500
           : theme.COLORS.GRAY_200};
         color: ${theme.COLORS.GRAY_50};

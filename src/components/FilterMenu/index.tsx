@@ -4,7 +4,7 @@ import { FilterBtn } from "./FilterBtn";
 const FilterMenu = () => {
   return (
     <FilterArea>
-      <FilterBtn active={"true"}>
+      <FilterBtn active>
         Todos <span>15</span>
       </FilterBtn>
       <FilterBtn>

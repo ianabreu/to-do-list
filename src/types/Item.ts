@@ -3,5 +3,4 @@ export type Item = {
   title: string;
   done: boolean;
   initialDate: string;
-  finalDate: string;
 };

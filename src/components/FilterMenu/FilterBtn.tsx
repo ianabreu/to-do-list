@@ -1,13 +1,13 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { ButtonFilter, ButtonFilterTypeStyleProps } from "./styles";
+import { ButtonFilter } from "./styles";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  active?: ButtonFilterTypeStyleProps;
+  active?: boolean;
   children: ReactNode;
 }
 
 export const FilterBtn: React.FC<ButtonProps> = ({
-  active = "false",
+  active = false,
   children,
   ...rest
 }) => {

@@ -1,15 +1,20 @@
+import { HTMLAttributes } from "react";
 import styled, { css } from "styled-components";
 
-export const Container = styled.div`
+interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
+  $done: boolean;
+}
+
+export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex: 1;
 
   -webkit-box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
   -moz-box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
   box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
-
-  ${({ theme }) => css`
+  ${({ theme, $done }) => css`
     background-color: ${theme.COLORS.WHITE};
     margin-top: ${theme.SPACING.P16};
     padding: ${theme.SPACING.P16};
@@ -20,27 +25,29 @@ export const Container = styled.div`
       height: ${theme.FONT_SIZE.XL};
       cursor: pointer;
     }
-  `}
-`;
-
-export const ContentInfo = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  ${({ theme }) => css`
-    padding: ${theme.SPACING.P08};
-    h2 {
-      text-decoration: line-through;
+    div {
+      display: flex;
+      flex-direction: column;
+      padding: ${theme.SPACING.P08};
+      flex: 1;
+      &:last-child {
+        flex: none;
+        flex-direction: row;
+      }
+    }
+    label {
+      text-decoration: ${$done ? "line-through" : "initial"};
+      font-weight: 700;
       text-align: left;
       font-size: ${theme.FONT_SIZE.MD};
-      color: ${theme.COLORS.GRAY_600};
+      color: ${$done ? theme.COLORS.GRAY_300 : theme.COLORS.GRAY_600};
       border-bottom: ${theme.BORDER_STYLE.LIGHT};
       padding-bottom: ${theme.SPACING.P08};
     }
     time {
       text-align: right;
       font-size: ${theme.FONT_SIZE.SM};
-      color: ${theme.COLORS.GRAY_500};
+      color: ${theme.COLORS.GRAY_300};
       margin-top: ${theme.SPACING.P08};
     }
   `}

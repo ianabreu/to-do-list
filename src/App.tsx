@@ -10,44 +10,45 @@ export default function App() {
   const [list, setList] = useState<Item[]>([
     {
       id: 1,
-      title: "Comprar pão",
+      title: "Tarefa 1",
       done: false,
       initialDate: "",
-      finalDate: "",
     },
     {
       id: 2,
-      title: "criar video insta",
+      title: "Tarefa 2",
       done: true,
       initialDate: "",
-      finalDate: "",
     },
     {
-      id: 2,
-      title: "criar video facebook",
+      id: 3,
+      title: "Tarefa 3",
       done: true,
       initialDate: "",
-      finalDate: "",
     },
     {
-      id: 1,
-      title: "Comprar pão",
+      id: 4,
+      title: "Tarefa 4",
       done: false,
       initialDate: "",
-      finalDate: "",
     },
     {
-      id: 2,
-      title: "criar video no youtube",
+      id: 5,
+      title: "Tarefa 5",
       done: true,
       initialDate: "",
-      finalDate: "",
     },
   ]);
 
   useEffect(() => {
-    let date = new Date();
-    console.log(date, typeof date);
+    function listDate() {
+      let newList = [...list];
+      newList.map((item) => {
+        return (item.initialDate = new Date().toISOString());
+      });
+      setList(newList);
+    }
+    listDate();
   });
   return (
     <Container>
