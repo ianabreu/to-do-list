@@ -2,9 +2,10 @@ import { useState, useEffect } from "react";
 import { Container, CenterArea, TopArea } from "./App.styles";
 import { Item } from "./types/Item";
 
-import Header from "./components/Header";
-import FilterMenu from "./components/FilterMenu";
-import ListItem from "./components/ListItem";
+import { Header } from "./components/Header";
+import { FilterMenu } from "./components/FilterMenu";
+import { ListItem } from "./components/ListItem";
+import { Modal, TaskProps } from "./components/Modal";
 
 export default function App() {
   const [list, setList] = useState<Item[]>([
@@ -39,6 +40,7 @@ export default function App() {
       initialDate: "",
     },
   ]);
+  const [modalVisible, setModalVisible] = useState(true);
 
   useEffect(() => {
     function listDate() {
@@ -49,7 +51,11 @@ export default function App() {
       setList(newList);
     }
     listDate();
-  });
+  }, []);
+
+  function addTask(task: TaskProps) {
+    console.log(task);
+  }
   return (
     <Container>
       <CenterArea>
@@ -57,6 +63,11 @@ export default function App() {
           <Header />
           <FilterMenu />
         </TopArea>
+        <Modal
+          isOpen={modalVisible}
+          addTask={addTask}
+          closeModal={() => setModalVisible(false)}
+        />
 
         {list.map((item, index) => (
           <ListItem task={item} key={index} />

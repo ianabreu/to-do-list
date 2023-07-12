@@ -8,7 +8,7 @@ type CheckedProp = boolean;
 type TaskProps = {
   task: Item;
 };
-const ListItem = ({ task }: TaskProps) => {
+export const ListItem = ({ task }: TaskProps) => {
   const [isChecked, setIsChecked] = useState<CheckedProp>(task.done);
 
   function getDate(date: string) {
@@ -53,4 +53,3 @@ const ListItem = ({ task }: TaskProps) => {
     </Container>
   );
 };
-export default ListItem;

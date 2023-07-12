@@ -1,15 +1,24 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Button = styled.button`
-  border: 0;
-  padding: 0.4rem;
-  border-radius: 0.5rem;
-  transition: filter 0.2s;
-
-  &[disabled] {
-    cursor: not-allowed;
-  }
-  &:hover {
-    filter: brightness(1.08);
-  }
+  ${({ theme }) => css`
+    background-color: ${theme.COLORS.BLUE_100};
+    color: ${theme.COLORS.BLUE_500};
+    font-size: ${theme.FONT_SIZE.LG};
+    font-weight: 700;
+    border-radius: ${theme.BORDER_RADIUS.B08};
+    padding: ${theme.SPACING.P08};
+    &:hover {
+      filter: opacity(0.9);
+    }
+    &[type*="reset"] {
+      background-color: ${theme.COLORS.WHITE};
+      color: ${theme.COLORS.GRAY_300};
+      font-size: ${theme.FONT_SIZE.MD};
+      font-weight: 400;
+    }
+    &[disabled] {
+      cursor: not-allowed;
+    }
+  `}
 `;

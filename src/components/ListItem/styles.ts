@@ -59,7 +59,7 @@ export const IconButton = styled.button`
     height: ${theme.FONT_SIZE.XL};
     margin-left: ${theme.SPACING.P08};
     color: ${color};
-    background-color: ${theme.COLORS.GRAY_50};
+    background-color: ${theme.COLORS.WHITE};
     &:hover {
       filter: brightness(1.2);
     }

@@ -1,5 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
-import { Button } from "./styles";
+import { Button as ButtonUI } from "./styles";
 import { FaSpinner } from "react-icons/fa";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -7,10 +7,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 }
 
-export function NewTask({ loading, children, ...rest }: ButtonProps) {
+export function Button({ loading, children, ...rest }: ButtonProps) {
   return (
-    <Button disabled={loading} {...rest}>
+    <ButtonUI disabled={loading} {...rest}>
       {loading ? <FaSpinner /> : <span>{children}</span>}
-    </Button>
+    </ButtonUI>
   );
 }

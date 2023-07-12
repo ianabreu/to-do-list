@@ -1,7 +1,7 @@
 import { FilterArea } from "./styles";
 import { FilterBtn } from "./FilterBtn";
 
-const FilterMenu = () => {
+export const FilterMenu = () => {
   return (
     <FilterArea>
       <FilterBtn active>
@@ -16,5 +16,3 @@ const FilterMenu = () => {
     </FilterArea>
   );
 };
-
-export default FilterMenu;

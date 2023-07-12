@@ -1,11 +1,11 @@
-import { Container, NewTask, Title } from "./styles";
+import { Button } from "../ui/Button";
+import { Container, Title } from "./styles";
 
-const Header = () => {
+export const Header = () => {
   return (
     <Container>
       <Title>Lista de Tarefas</Title>
-      <NewTask>+ Nova Tarefa</NewTask>
+      <Button>+ Nova Tarefa</Button>
     </Container>
   );
 };
-export default Header;
