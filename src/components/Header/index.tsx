@@ -1,11 +1,14 @@
 import { Button } from "../ui/Button";
 import { Container, Title } from "./styles";
 
-export const Header = () => {
+type HeaderProps = {
+  newTask: () => void;
+};
+export const Header = ({ newTask }: HeaderProps) => {
   return (
     <Container>
       <Title>Lista de Tarefas</Title>
-      <Button>+ Nova Tarefa</Button>
+      <Button onClick={newTask}>+ Nova Tarefa</Button>
     </Container>
   );
 };

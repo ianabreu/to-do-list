@@ -2,7 +2,6 @@ import { FormEvent, useState } from "react";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { ModalArea, Container, ButtonArea, DateArea } from "./styles";
-import { Item } from "../../types/Item";
 
 export type TaskProps = {
   title: string;
@@ -20,14 +19,16 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  async function handleAddTask(event: FormEvent) {
+  function handleAddTask(event: FormEvent) {
     event.preventDefault();
+    if (title === "" || date === "" || time === "")
+      return alert("Preençha todos os campos!");
     const task = {
       title,
       date,
       time,
     };
-    await addTask(task);
+    addTask(task);
     closeAndClear();
   }
   function closeAndClear() {
@@ -38,37 +39,36 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
   }
 
   return (
-    <ModalArea
-      style={!isOpen ? { display: "none" } : undefined}
-      onClick={closeAndClear}
-    >
+    <ModalArea style={!isOpen ? { display: "none" } : undefined}>
       <Container>
         <h3>Nova Tarefa</h3>
         <form onSubmit={handleAddTask}>
           <Input
             type="text"
             placeholder="Digite sua tarefa."
-            required
             label="Título:"
             onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <DateArea>
             <Input
               type="date"
-              required
               label="Data de Início:"
               onChange={(e) => setDate(e.target.value)}
+              value={date}
             />
 
             <Input
               type="time"
-              required
               label="Horário:"
               onChange={(e) => setTime(e.target.value)}
+              value={time}
             />
           </DateArea>
           <ButtonArea>
-            <Button type="reset">Cancelar</Button>
+            <Button type="reset" onClick={closeAndClear}>
+              Cancelar
+            </Button>
             <Button type="submit">Salvar</Button>
           </ButtonArea>
         </form>
