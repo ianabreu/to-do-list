@@ -6,8 +6,10 @@ import { Header } from "../../components/Header";
 import { FilterMenu } from "../../components/FilterMenu";
 import { ListItem } from "../../components/ListItem";
 import { Modal, TaskProps } from "../../components/Modal";
+import useApi from "../../services/api";
 
 export default function Home() {
+  const { addTask } = useApi();
   const [list, setList] = useState<Item[]>([
     {
       id: 1,
@@ -53,8 +55,8 @@ export default function Home() {
     listDate();
   }, []);
 
-  function addTask(task: TaskProps) {
-    console.log(task);
+  async function handleAddTask(task: TaskProps) {
+    await addTask(task);
   }
   function openModal() {
     setModalVisible(true);
@@ -68,7 +70,7 @@ export default function Home() {
         </TopArea>
         <Modal
           isOpen={modalVisible}
-          addTask={addTask}
+          addTask={handleAddTask}
           closeModal={() => setModalVisible(false)}
         />
 
