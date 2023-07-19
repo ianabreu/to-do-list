@@ -3,17 +3,17 @@ import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { ModalArea, Container, ButtonArea, DateArea } from "./styles";
 
-export type TaskProps = {
+export type addTaskProps = {
   title: string;
   executionDate: Date;
   created_at: Date;
 };
 
-type ModalProps = {
+interface ModalProps {
   isOpen: boolean;
-  addTask: (task: TaskProps) => void;
+  addTask: (task: addTaskProps) => void;
   closeModal: () => void;
-};
+}
 
 export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
   const [title, setTitle] = useState("");
