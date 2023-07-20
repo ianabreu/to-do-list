@@ -4,29 +4,27 @@ import { FaTrash, FaFilePen } from "react-icons/fa6";
 import { Container, IconButton } from "./styles";
 
 import { TaskProps } from "../../types/Task";
+import { utcToZonedTime } from "date-fns-tz";
 
 export const ListTasks = ({ task }: TaskProps) => {
   const [isChecked, setIsChecked] = useState(task.done);
 
-  // function getDate(date: string) {
-  //   let dateFormat = new Date(date);
-
-  //   let day = dateFormat.toLocaleDateString("pt-BR", {
-  //     weekday: "long",
-  //     hour: "2-digit",
-  //     minute: "numeric",
-  //     hour12: true,
-  //   });
-  //   let dayAndTime = day.split(",");
-  //   let dayOfWeek = dayAndTime[0][0].toUpperCase() + dayAndTime[0].substring(1);
-
-  //   return (
-  //     <time>
-  //       <span style={{ fontWeight: 700 }}>{dayOfWeek}</span> &#8212;{" "}
-  //       {dayAndTime[1]}
-  //     </time>
-  //   );
-  // }
+  function getDate(timestamp: string) {
+    const date = new Date(timestamp);
+    let formatedDate = utcToZonedTime(
+      date,
+      "America/Sao_Paulo"
+    ).toLocaleDateString("pt-BR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    let finalFormat = formatedDate.replace(",", " —");
+    return <time>{finalFormat}</time>;
+  }
   return (
     <Container $done={isChecked}>
       <input
@@ -37,7 +35,7 @@ export const ListTasks = ({ task }: TaskProps) => {
       />
       <div>
         <label htmlFor={task.id}>{task.title}</label>
-        {/* {getDate(String(task.executionDate))} */}
+        {getDate(task.executionDate)}
       </div>
       <div>
         <IconButton color="#045ff4">

@@ -1,12 +1,13 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { ModalArea, Container, ButtonArea, DateArea } from "./styles";
+import { format } from "date-fns";
 
 export type addTaskProps = {
   title: string;
-  executionDate: Date;
-  created_at: Date;
+  executionDate: string;
+  created_at: string;
 };
 
 interface ModalProps {
@@ -17,28 +18,22 @@ interface ModalProps {
 
 export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState(dateNow());
+  const [date, setDate] = useState(dateNow(new Date()));
   const [time, setTime] = useState("");
 
-  useEffect(() => {}, []);
-  function timestampConvert(date: string, time: string) {
-    const [year, month, day] = date.split("-");
-    const [hours, minutes] = time.split(":");
-    const timestamp = new Date(
-      Number(year),
-      Number(month) - 1,
-      Number(day),
-      Number(hours),
-      Number(minutes)
-    );
-    return timestamp;
+  function getTime(date: string, time: string) {
+    let dateTime = new Date(`${date}T${time}:00`);
+    return dateTime;
   }
-  function dateNow() {
-    let dateNow = new Date(Date.now());
-    const year = dateNow.getFullYear();
-    const month = dateNow.getMonth() + 1;
-    const day = dateNow.getDate();
-    return `${year}-${month < 10 ? "0".concat(String(month)) : month}-${day}`;
+  function dateNow(date: Date) {
+    let formatedDate = format(date, "yyyy-MM-dd");
+    return formatedDate;
+  }
+  function closeAndClear() {
+    setTitle("");
+    setDate(dateNow(new Date()));
+    setTime("");
+    closeModal();
   }
 
   function handleAddTask(event: FormEvent) {
@@ -46,31 +41,19 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
     if (title === "" || date === "" || time === "")
       return alert("Preençha todos os campos!");
 
-    let executionDate = timestampConvert(date, time);
-    let dateNow = new Date(Date.now());
-    // const year = dateNow.getFullYear();
-    // const month = dateNow.getMonth() + 1;
-    // const day = dateNow.getDate();
-    // console.log(`${year}-${month}-${day}`);
+    let executionDate = getTime(date, time);
+    let createdAt = new Date(Date.now());
 
-    // return;
-
-    if (executionDate <= dateNow) {
+    if (executionDate <= createdAt) {
       return alert("A data não pode ser menor que a data atual.");
     }
     const task = {
       title,
-      executionDate,
-      created_at: dateNow,
+      executionDate: executionDate.toJSON(),
+      created_at: createdAt.toJSON(),
     };
     addTask(task);
     closeAndClear();
-  }
-  function closeAndClear() {
-    setTitle("");
-    setDate("");
-    setTime("");
-    closeModal();
   }
 
   return (

@@ -3,11 +3,8 @@ import {
   DocumentSnapshot,
   addDoc,
   collection,
-  doc,
   getDocs,
-  onSnapshot,
   query,
-  where,
 } from "firebase/firestore";
 
 import { Task } from "../types/Task";

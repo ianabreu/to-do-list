@@ -2,8 +2,8 @@ export interface Task {
   id: string;
   title: string;
   done: boolean;
-  executionDate: Date;
-  created_at: Date;
+  executionDate: string;
+  created_at: string;
 }
 export interface TaskProps {
   task: Task;
