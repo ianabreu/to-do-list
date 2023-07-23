@@ -13,4 +13,9 @@ export interface IupdateTask {
 }
 export interface TaskProps {
   task: Task;
+  handleDeleteTask: (id: string) => void;
+  handleUpdateTaskDone: (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) => void;
 }

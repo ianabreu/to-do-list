@@ -7,6 +7,7 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  orderBy,
   query,
   updateDoc,
 } from "firebase/firestore";
@@ -17,7 +18,10 @@ import { addTaskProps } from "../components/Modal";
 function useApi() {
   async function listAllTasks() {
     try {
-      const queryTasks = query(collection(database, "TASKS"));
+      const queryTasks = query(
+        collection(database, "TASKS"),
+        orderBy("executionDate")
+      );
       const tasks: Task[] = [];
 
       const querySnapshot = await getDocs(queryTasks);

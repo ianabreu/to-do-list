@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Container, CenterArea, TopArea } from "./styles";
 import { Task } from "../../types/Task";
 
@@ -9,30 +9,50 @@ import { Modal, addTaskProps } from "../../components/Modal";
 import useApi from "../../services/api";
 
 export default function Home() {
-  const { addTask, listAllTasks } = useApi();
+  const { addTask, listAllTasks, deleteTask, updateTask } = useApi();
 
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState<Task[]>([]);
-
   const [modalVisible, setModalVisible] = useState(false);
-  useEffect(() => {
-    async function loadTasks() {
-      setLoading(true);
-      const tasks = await listAllTasks();
-      if (tasks !== undefined) {
-        setList(tasks);
-      }
-      setLoading(false);
+
+  const loadTasks = useCallback(async () => {
+    const tasks = await listAllTasks();
+    if (tasks !== undefined) {
+      setList(tasks);
     }
+  }, [listAllTasks]);
+
+  useEffect(() => {
+    setLoading(true);
     loadTasks();
-  }, []);
+    setLoading(false);
+  }, [loadTasks]);
 
   async function handleAddTask(task: addTaskProps) {
     await addTask(task);
+    const tasks = await loadTasks();
+    if (tasks !== undefined) {
+      setList(tasks);
+    }
   }
+
+  async function handleUpdateTaskDone(
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string
+  ) {
+    const done = e.target.checked;
+    await updateTask({ id, done });
+  }
+
+  async function handleDeleteTask(id: string) {
+    await deleteTask(id);
+    loadTasks();
+  }
+
   function openModal() {
     setModalVisible(true);
   }
+
   return (
     <Container>
       <CenterArea>
@@ -48,7 +68,14 @@ export default function Home() {
         {loading ? (
           <div>Carregando...</div>
         ) : (
-          list.map((item, index) => <ListTasks task={item} key={index} />)
+          list.map((item, index) => (
+            <ListTasks
+              task={item}
+              key={index}
+              handleDeleteTask={handleDeleteTask}
+              handleUpdateTaskDone={handleUpdateTaskDone}
+            />
+          ))
         )}
       </CenterArea>
     </Container>
