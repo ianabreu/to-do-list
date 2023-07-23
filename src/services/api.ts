@@ -1,13 +1,17 @@
 import { database } from "../config/firebaseConnection";
 import {
+  DocumentData,
   DocumentSnapshot,
   addDoc,
   collection,
+  deleteDoc,
+  doc,
   getDocs,
   query,
+  updateDoc,
 } from "firebase/firestore";
 
-import { Task } from "../types/Task";
+import { IupdateTask, Task } from "../types/Task";
 import { addTaskProps } from "../components/Modal";
 
 function useApi() {
@@ -23,7 +27,7 @@ function useApi() {
         if (data !== undefined) {
           tasks.push({
             id: doc.id,
-            title: data.title ?? "",
+            title: data.title ?? "Erro ao salvar tarefa",
             done: data.done ?? false,
             executionDate: data.executionDate ?? new Date(),
             created_at: data.created_at ?? new Date(),
@@ -49,9 +53,28 @@ function useApi() {
       console.log(error);
     }
   }
+  async function updateTask({ id, ...fieldsToUpdate }: IupdateTask) {
+    const taskRef = doc(database, "TASKS", id);
+    try {
+      await updateDoc<DocumentData, DocumentData>(taskRef, fieldsToUpdate);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  async function deleteTask(id: string) {
+    const taskRef = doc(database, "TASKS", id);
+    try {
+      await deleteDoc(taskRef);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return {
     addTask,
     listAllTasks,
+    updateTask,
+    deleteTask,
   };
 }
 export default useApi;
