@@ -1,17 +1,21 @@
 import { FilterArea } from "./styles";
 import { FilterBtn } from "./FilterBtn";
 
-export const FilterMenu = () => {
+interface IFilterMenu {
+  quantityOfItems: number;
+  isChecked: number;
+}
+export const FilterMenu = ({ quantityOfItems, isChecked }: IFilterMenu) => {
   return (
     <FilterArea>
       <FilterBtn active>
-        Todos <span>15</span>
+        Todos <span>{quantityOfItems}</span>
       </FilterBtn>
       <FilterBtn>
-        Ativas <span>8</span>
+        A Fazer <span>{quantityOfItems - isChecked}</span>
       </FilterBtn>
       <FilterBtn>
-        Concluídas <span>7</span>
+        Concluídas <span>{isChecked}</span>
       </FilterBtn>
     </FilterArea>
   );

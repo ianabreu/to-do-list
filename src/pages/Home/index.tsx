@@ -58,7 +58,10 @@ export default function Home() {
       <CenterArea>
         <TopArea>
           <Header newTask={openModal} />
-          <FilterMenu />
+          <FilterMenu
+            quantityOfItems={list.length}
+            isChecked={list.filter(({ done }) => done === true).length}
+          />
         </TopArea>
         <Modal
           isOpen={modalVisible}
