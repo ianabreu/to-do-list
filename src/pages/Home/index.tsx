@@ -3,7 +3,7 @@ import { Container, CenterArea, TopArea } from "./styles";
 import { Task } from "../../types/Task";
 
 import { Header } from "../../components/Header";
-import { FilterMenu } from "../../components/FilterMenu";
+import { FilterMenu, IStatusTypeProps } from "../../components/FilterMenu";
 import { ListTasks } from "../../components/ListTasks";
 import { Modal, addTaskProps } from "../../components/Modal";
 import useApi from "../../services/api";
@@ -13,7 +13,15 @@ export default function Home() {
 
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState<Task[]>([]);
+  const [activeFilter, setActiveFilter] = useState<IStatusTypeProps>("all");
   const [modalVisible, setModalVisible] = useState(false);
+
+  const filtredList =
+    activeFilter === "todo"
+      ? list.filter((item) => item.done === false)
+      : activeFilter === "completed"
+      ? list.filter((item) => item.done === true)
+      : list;
 
   const loadTasks = useCallback(async () => {
     const tasks = await listAllTasks();
@@ -24,9 +32,9 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    loadTasks();
-    setLoading(false);
-  }, [loadTasks]);
+    // loadTasks();
+    // setLoading(false);
+  }, []);
 
   async function handleAddTask(task: addTaskProps) {
     await addTask(task);
@@ -41,6 +49,13 @@ export default function Home() {
     id: string
   ) {
     const done = e.target.checked;
+    let newList = [...list];
+    newList.forEach((task) => {
+      if (task.id === id) {
+        task.done = done;
+      }
+    });
+    setList(newList);
     await updateTask({ id, done });
   }
 
@@ -52,6 +67,10 @@ export default function Home() {
   function openModal() {
     setModalVisible(true);
   }
+  function filterList(status: IStatusTypeProps) {
+    setActiveFilter(status);
+  }
+  console.log("RENDERIZOU");
 
   return (
     <Container>
@@ -61,6 +80,8 @@ export default function Home() {
           <FilterMenu
             quantityOfItems={list.length}
             isChecked={list.filter(({ done }) => done === true).length}
+            onFilter={filterList}
+            activeFilter={activeFilter}
           />
         </TopArea>
         <Modal
@@ -71,7 +92,7 @@ export default function Home() {
         {loading ? (
           <div>Carregando...</div>
         ) : (
-          list.map((item, index) => (
+          filtredList.map((item, index) => (
             <ListTasks
               task={item}
               key={index}
