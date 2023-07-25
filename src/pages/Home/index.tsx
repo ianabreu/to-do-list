@@ -8,6 +8,7 @@ import { ListTasks } from "../../components/ListTasks";
 import { Modal, addTaskProps } from "../../components/Modal";
 import useApi from "../../services/api";
 import { Loading } from "../../components/ui/Loading/Index";
+import { EmptyList } from "../../components/EmptyList";
 
 export default function Home() {
   const { addTask, listAllTasks, deleteTask, updateTask } = useApi();
@@ -92,7 +93,7 @@ export default function Home() {
         />
         {loading ? (
           <Loading />
-        ) : (
+        ) : filtredList.length > 0 ? (
           filtredList.map((item, index) => (
             <ListTasks
               task={item}
@@ -101,6 +102,8 @@ export default function Home() {
               handleUpdateTaskDone={handleUpdateTaskDone}
             />
           ))
+        ) : (
+          <EmptyList type={activeFilter} newTask={openModal} />
         )}
       </CenterArea>
     </Container>
