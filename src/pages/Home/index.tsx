@@ -7,6 +7,7 @@ import { FilterMenu, IStatusTypeProps } from "../../components/FilterMenu";
 import { ListTasks } from "../../components/ListTasks";
 import { Modal, addTaskProps } from "../../components/Modal";
 import useApi from "../../services/api";
+import { Loading } from "../../components/ui/Loading/Index";
 
 export default function Home() {
   const { addTask, listAllTasks, deleteTask, updateTask } = useApi();
@@ -32,8 +33,8 @@ export default function Home() {
 
   useEffect(() => {
     setLoading(true);
-    // loadTasks();
-    // setLoading(false);
+    loadTasks();
+    setLoading(false);
   }, []);
 
   async function handleAddTask(task: addTaskProps) {
@@ -90,7 +91,7 @@ export default function Home() {
           closeModal={() => setModalVisible(false)}
         />
         {loading ? (
-          <div>Carregando...</div>
+          <Loading />
         ) : (
           filtredList.map((item, index) => (
             <ListTasks
