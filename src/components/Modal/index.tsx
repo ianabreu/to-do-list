@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { ModalArea, Container, ButtonArea, DateArea } from "./styles";
@@ -20,6 +20,10 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState(dateNow(new Date()));
   const [time, setTime] = useState("");
+
+  useEffect(() => {
+    inputRef.current && isOpen && inputRef.current.focus();
+  }, [isOpen]);
 
   function getTime(date: string, time: string) {
     let dateTime = new Date(`${date}T${time}:00`);
@@ -55,6 +59,7 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
     addTask(task);
     closeAndClear();
   }
+  const inputRef = useRef<HTMLInputElement>(null);
 
   return (
     <ModalArea style={!isOpen ? { display: "none" } : undefined}>
@@ -67,6 +72,7 @@ export const Modal = ({ isOpen, addTask, closeModal }: ModalProps) => {
             label="Título:"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
+            ref={inputRef}
           />
           <DateArea>
             <Input
