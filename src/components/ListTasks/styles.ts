@@ -46,7 +46,7 @@ export const Container = styled.div<ContainerProps>`
       text-align: left;
       font-size: ${theme.FONT_SIZE.MD};
       color: ${$done
-        ? theme.COLORS.GRAY_300
+        ? theme.COLORS.GRAY_200
         : $expired
         ? theme.COLORS.RED_500
         : theme.COLORS.GRAY_600};
@@ -56,7 +56,11 @@ export const Container = styled.div<ContainerProps>`
     time {
       text-align: right;
       font-size: ${theme.FONT_SIZE.SM};
-      color: ${$expired ? theme.COLORS.RED_500 : theme.COLORS.GRAY_300};
+      color: ${$done
+        ? theme.COLORS.GRAY_200
+        : $expired
+        ? theme.COLORS.RED_500
+        : theme.COLORS.GRAY_500};
       margin-top: ${theme.SPACING.P08};
     }
   `}
