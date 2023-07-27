@@ -18,5 +18,6 @@ export const Title = styled.h1`
   text-align: center;
   ${({ theme }) => css`
     color: ${theme.COLORS.GRAY_600};
+    font-size: ${theme.FONT_SIZE.XL};
   `}
 `;

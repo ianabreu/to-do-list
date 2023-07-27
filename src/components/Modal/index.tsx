@@ -95,7 +95,7 @@ export const Modal = ({
   return (
     <ModalArea style={!isOpen ? { display: "none" } : undefined}>
       <Container>
-        <h3>Nova Tarefa</h3>
+        <h3>{isEditing ? "Editar" : "Nova"} Tarefa</h3>
         <form onSubmit={handleAddTask}>
           <Input
             type="text"
