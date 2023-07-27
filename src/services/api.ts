@@ -73,7 +73,7 @@ function useApi() {
         title,
         created_at,
         executionDate,
-        done,
+        done: false,
       }).catch((err) => {
         console.log(err);
       });

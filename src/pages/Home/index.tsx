@@ -86,7 +86,6 @@ export default function Home() {
   function filterList(status: IStatusTypeProps) {
     setActiveFilter(status);
   }
-  console.log("RENDERIZOU");
 
   return (
     <Container>

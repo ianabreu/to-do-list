@@ -13,7 +13,7 @@ export const ListTasks = ({
   handleUpdateTask,
 }: TaskProps) => {
   const [isChecked, setIsChecked] = useState(task.done);
-
+  const expired: boolean = new Date(task.executionDate) < new Date(Date.now());
   useEffect(() => {
     setIsChecked(task.done);
   }, [task.done]);
@@ -36,15 +36,23 @@ export const ListTasks = ({
   }
 
   return (
-    <Container $done={isChecked}>
+    <Container $done={isChecked} $expired={expired}>
       <input
-        id={task.id.toString()}
+        id={task.id}
         type="checkbox"
         checked={isChecked}
         onChange={(e) => handleUpdateTaskDone(e, task.id)}
+        disabled={expired}
       />
       <div>
-        <label htmlFor={task.id}>{task.title}</label>
+        <label
+          htmlFor={task.id}
+          onClick={() => {
+            expired && alert("Prazo expirado. Edite ou crie uma nova tarefa");
+          }}
+        >
+          {task.title}
+        </label>
         {getDate(task.executionDate)}
       </div>
       <div>

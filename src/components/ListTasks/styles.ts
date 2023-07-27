@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   $done: boolean;
+  $expired: boolean;
 }
 
 export const Container = styled.div<ContainerProps>`
@@ -14,7 +15,7 @@ export const Container = styled.div<ContainerProps>`
   -webkit-box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
   -moz-box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
   box-shadow: 1px 1px 8px 0px rgba(38, 38, 38, 0.3);
-  ${({ theme, $done }) => css`
+  ${({ theme, $done, $expired }) => css`
     background-color: ${theme.COLORS.WHITE};
     margin-top: ${theme.SPACING.P16};
     padding: ${theme.SPACING.P16};
@@ -23,7 +24,7 @@ export const Container = styled.div<ContainerProps>`
     input {
       width: ${theme.FONT_SIZE.XL};
       height: ${theme.FONT_SIZE.XL};
-      cursor: pointer;
+      cursor: ${$expired ? "not-allowed" : "pointer"};
     }
     div {
       display: flex;
@@ -36,18 +37,26 @@ export const Container = styled.div<ContainerProps>`
       }
     }
     label {
-      text-decoration: ${$done ? "line-through" : "initial"};
+      text-decoration: ${$expired
+        ? "line-through"
+        : $done
+        ? "line-through"
+        : "initial"};
       font-weight: 700;
       text-align: left;
       font-size: ${theme.FONT_SIZE.MD};
-      color: ${$done ? theme.COLORS.GRAY_300 : theme.COLORS.GRAY_600};
+      color: ${$done
+        ? theme.COLORS.GRAY_300
+        : $expired
+        ? theme.COLORS.RED_500
+        : theme.COLORS.GRAY_600};
       border-bottom: ${theme.BORDER_STYLE.LIGHT};
       padding-bottom: ${theme.SPACING.P08};
     }
     time {
       text-align: right;
       font-size: ${theme.FONT_SIZE.SM};
-      color: ${theme.COLORS.GRAY_300};
+      color: ${$expired ? theme.COLORS.RED_500 : theme.COLORS.GRAY_300};
       margin-top: ${theme.SPACING.P08};
     }
   `}
