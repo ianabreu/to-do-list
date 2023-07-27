@@ -10,6 +10,7 @@ export const ListTasks = ({
   task,
   handleDeleteTask,
   handleUpdateTaskDone,
+  handleUpdateTask,
 }: TaskProps) => {
   const [isChecked, setIsChecked] = useState(task.done);
 
@@ -47,7 +48,7 @@ export const ListTasks = ({
         {getDate(task.executionDate)}
       </div>
       <div>
-        <IconButton color="#045ff4">
+        <IconButton color="#045ff4" onClick={() => handleUpdateTask(task)}>
           <FaFilePen size={25} />
         </IconButton>
         <IconButton color="#bf2e2e" onClick={() => handleDeleteTask(task.id)}>

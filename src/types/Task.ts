@@ -18,4 +18,5 @@ export interface TaskProps {
     e: React.ChangeEvent<HTMLInputElement>,
     id: string
   ) => void;
+  handleUpdateTask: (task: Task) => void;
 }

@@ -11,12 +11,14 @@ import { Loading } from "../../components/ui/Loading/Index";
 import { EmptyList } from "../../components/EmptyList";
 
 export default function Home() {
-  const { addTask, listAllTasks, deleteTask, updateTask } = useApi();
+  const { addTask, listAllTasks, deleteTask, updateTask, editTask } = useApi();
 
   const [loading, setLoading] = useState(true);
   const [list, setList] = useState<Task[]>([]);
   const [activeFilter, setActiveFilter] = useState<IStatusTypeProps>("all");
   const [modalVisible, setModalVisible] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editabeTask, setEditabeTask] = useState<Task | null>(null);
 
   const filtredList =
     activeFilter === "todo"
@@ -45,6 +47,13 @@ export default function Home() {
       setList(tasks);
     }
   }
+  async function handleEditTask(task: Task) {
+    await editTask(task);
+    const tasks = await loadTasks();
+    if (tasks !== undefined) {
+      setList(tasks);
+    }
+  }
 
   async function handleUpdateTaskDone(
     e: React.ChangeEvent<HTMLInputElement>,
@@ -64,6 +73,11 @@ export default function Home() {
   async function handleDeleteTask(id: string) {
     await deleteTask(id);
     loadTasks();
+  }
+  async function handleUpdateTask(task: Task) {
+    setEditabeTask(task);
+    setEditing(true);
+    openModal();
   }
 
   function openModal() {
@@ -89,7 +103,10 @@ export default function Home() {
         <Modal
           isOpen={modalVisible}
           addTask={handleAddTask}
+          editThisTask={handleEditTask}
           closeModal={() => setModalVisible(false)}
+          isEditing={editing}
+          task={editabeTask}
         />
         {loading ? (
           <Loading />
@@ -100,6 +117,7 @@ export default function Home() {
               key={index}
               handleDeleteTask={handleDeleteTask}
               handleUpdateTaskDone={handleUpdateTaskDone}
+              handleUpdateTask={handleUpdateTask}
             />
           ))
         ) : (

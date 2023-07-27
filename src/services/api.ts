@@ -65,6 +65,22 @@ function useApi() {
       console.log(error);
     }
   }
+  async function editTask(task: Task) {
+    const { id, title, created_at, executionDate, done } = task;
+    const taskRef = doc(database, "TASKS", id);
+    try {
+      await updateDoc<DocumentData, DocumentData>(taskRef, {
+        title,
+        created_at,
+        executionDate,
+        done,
+      }).catch((err) => {
+        console.log(err);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
   async function deleteTask(id: string) {
     const taskRef = doc(database, "TASKS", id);
     try {
@@ -79,6 +95,7 @@ function useApi() {
     listAllTasks,
     updateTask,
     deleteTask,
+    editTask,
   };
 }
 export default useApi;
