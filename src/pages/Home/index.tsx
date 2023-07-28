@@ -38,6 +38,7 @@ export default function Home() {
     setLoading(true);
     loadTasks();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function handleAddTask(task: addTaskProps) {

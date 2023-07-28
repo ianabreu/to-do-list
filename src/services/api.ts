@@ -66,7 +66,7 @@ function useApi() {
     }
   }
   async function editTask(task: Task) {
-    const { id, title, created_at, executionDate, done } = task;
+    const { id, title, created_at, executionDate } = task;
     const taskRef = doc(database, "TASKS", id);
     try {
       await updateDoc<DocumentData, DocumentData>(taskRef, {
